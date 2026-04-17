@@ -1,1 +1,1114 @@
+<!DOCTYPE html>
 
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel d'Optimisation Humaine - Dashboard Interactif</title>
+
+```
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="styles.css">
+```
+
+</head>
+<body>
+    <div class="app-container">
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+
+```
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="logo">
+            <h1>MOH</h1>
+            <p>Manuel d'Optimisation Humaine</p>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Dashboard</div>
+            <div class="nav-item active" data-section="dashboard">📊 Vue d'ensemble</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Finance</div>
+            <div class="nav-item" data-section="finance">💰 Indépendance Financière</div>
+            <div class="nav-item" data-section="investment">📈 Investissement</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Social</div>
+            <div class="nav-item" data-section="social">🤝 Capital Social</div>
+            <div class="nav-item" data-section="reputation">⭐ Réputation</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Santé</div>
+            <div class="nav-item" data-section="health">💪 Santé & Fitness</div>
+            <div class="nav-item" data-section="nutrition">🥗 Nutrition</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Cognition</div>
+            <div class="nav-item" data-section="learning">🧠 Apprentissage</div>
+            <div class="nav-item" data-section="productivity">⚡ Productivité</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Carrière</div>
+            <div class="nav-item" data-section="career">💼 Carrière</div>
+            <div class="nav-item" data-section="salary">💵 Négociation</div>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-section-title">Attractivité</div>
+            <div class="nav-item" data-section="attractivity">🔥 Score d'Attractivité</div>
+            <div class="nav-item" data-section="style">👔 Style & Apparence</div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="header">
+                <h2>Tableau de Bord Principal</h2>
+                <p>Vue d'ensemble de vos indicateurs clés de performance</p>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">IPLF</span>
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));">💰</div>
+                    </div>
+                    <div class="card-value" id="dashboard-iplf">0.0%</div>
+                    <div class="card-subtitle">Indice de Progression vers la Liberté Financière</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="iplf-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">SES</span>
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--accent-green), #00cc66);">⭐</div>
+                    </div>
+                    <div class="card-value" id="dashboard-ses">0.00</div>
+                    <div class="card-subtitle">Score d'Échelle Sociale</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="ses-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Santé</span>
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--accent-orange), #ff8c00);">💪</div>
+                    </div>
+                    <div class="card-value" id="dashboard-health">0/100</div>
+                    <div class="card-subtitle">Score de Santé Global</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="health-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">Attractivité</span>
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--accent-purple), #d946ef);">🔥</div>
+                    </div>
+                    <div class="card-value" id="dashboard-attractivity">0.00</div>
+                    <div class="card-subtitle">Score d'Attractivité Masculine</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="attractivity-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="chart-title">Évolution de l'IPLF</h3>
+                <canvas id="iplfChart"></canvas>
+            </div>
+            
+            <div class="info-box">
+                <h3>💡 Objectifs du Mois</h3>
+                <ul id="monthly-goals">
+                    <li>Mettre à jour vos données financières</li>
+                    <li>Calculer votre score d'attractivité</li>
+                    <li>Planifier vos investissements</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Finance Section -->
+        <section id="finance" class="section">
+            <div class="header">
+                <h2>Indépendance Financière</h2>
+                <p>Calculez votre progression vers la liberté financière</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur IPLF</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-iplf"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Revenu Mensuel Net (€)</label>
+                    <input type="number" class="form-input" id="revenu-mensuel" placeholder="1743" value="1743">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Dépenses Mensuelles (€)</label>
+                    <input type="number" class="form-input" id="depenses-mensuelles" placeholder="1200" value="1200">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Capital Actuel (€)</label>
+                    <input type="number" class="form-input" id="capital-actuel" placeholder="5000" value="5000">
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateIPLF()">
+                    <span>Calculer l'IPLF</span>
+                </button>
+                
+                <div id="iplf-results" style="margin-top: 2rem; display: none;">
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-title">Épargne Mensuelle</div>
+                            <div class="card-value" id="result-epargne">0€</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Capital Cible</div>
+                            <div class="card-value" id="result-capital-cible">0€</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">IPLF</div>
+                            <div class="card-value" id="result-iplf">0%</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Temps Restant</div>
+                            <div class="card-value" id="result-temps">0 ans</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Investment Section -->
+        <section id="investment" class="section">
+            <div class="header">
+                <h2>Simulateur d'Investissement</h2>
+                <p>Visualisez la puissance des intérêts composés</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Projection du Capital</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-compound"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Capital Initial (€)</label>
+                    <input type="number" class="form-input" id="capital-initial" placeholder="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Épargne Mensuelle (€)</label>
+                    <input type="range" class="form-slider" id="epargne-slider" min="0" max="2000" step="50" value="300">
+                    <span class="slider-value" id="epargne-value">300€</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Rendement Annuel (%)</label>
+                    <input type="range" class="form-slider" id="rendement-slider" min="0" max="15" step="0.5" value="7">
+                    <span class="slider-value" id="rendement-value">7%</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Durée (années)</label>
+                    <input type="range" class="form-slider" id="duree-slider" min="1" max="40" step="1" value="40">
+                    <span class="slider-value" id="duree-value">40 ans</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateInvestment()">
+                    <span>Simuler</span>
+                </button>
+            </div>
+            
+            <div class="chart-container" style="margin-top: 2rem;">
+                <h3 class="chart-title">Projection de Croissance</h3>
+                <canvas id="investmentChart"></canvas>
+            </div>
+            
+            <div class="info-box">
+                <h3>📊 Enveloppes Fiscales Recommandées</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Enveloppe</th>
+                            <th>Plafond</th>
+                            <th>Fiscalité</th>
+                            <th>Priorité</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Livret Jeune</td>
+                            <td>1 600 €</td>
+                            <td>Exonéré</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>LEP</td>
+                            <td>7 700 €</td>
+                            <td>Exonéré</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Livret A</td>
+                            <td>22 950 €</td>
+                            <td>Exonéré</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>PEA</td>
+                            <td>150 000 €</td>
+                            <td>PS 17,2% après 5 ans</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>Assurance-vie</td>
+                            <td>Illimité</td>
+                            <td>PS + IR après 8 ans</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Social Capital Section -->
+        <section id="social" class="section">
+            <div class="header">
+                <h2>Capital Social</h2>
+                <p>Optimisez votre réseau et votre influence sociale</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur SES</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-ses"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Revenu Mensuel (€)</label>
+                    <input type="number" class="form-input" id="ses-revenu" placeholder="1743" value="1743">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Score de Réseau (0-100)</label>
+                    <input type="range" class="form-slider" id="reseau-slider" min="0" max="100" step="1" value="50">
+                    <span class="slider-value" id="reseau-value">50</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Score de Réputation (0-100)</label>
+                    <input type="range" class="form-slider" id="reputation-slider" min="0" max="100" step="1" value="60">
+                    <span class="slider-value" id="reputation-value">60</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Score de Compétences (0-1)</label>
+                    <input type="range" class="form-slider" id="competences-slider" min="0" max="1" step="0.01" value="0.5">
+                    <span class="slider-value" id="competences-value">0.50</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateSES()">
+                    <span>Calculer le SES</span>
+                </button>
+                
+                <div id="ses-results" style="margin-top: 2rem; display: none;">
+                    <div class="card">
+                        <div class="card-title">Score d'Échelle Sociale (SES)</div>
+                        <div class="card-value" id="result-ses">0.00</div>
+                        <div class="card-subtitle">Un score de 1.0 correspond au profil médian français</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🤝 Loi de Dunbar : Gestion du Réseau</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Le cerveau humain ne peut maintenir qu'environ 150 relations significatives.
+                </p>
+                <ul>
+                    <li><strong>Cercle intime (5 personnes)</strong> : Contact quotidien ou hebdomadaire</li>
+                    <li><strong>Bons amis (15 personnes)</strong> : Contact mensuel</li>
+                    <li><strong>Amis (50 personnes)</strong> : Contact trimestriel</li>
+                    <li><strong>Connaissances (80 personnes)</strong> : Contact semestriel</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Health Section -->
+        <section id="health" class="section">
+            <div class="header">
+                <h2>Santé & Fitness</h2>
+                <p>Optimisez votre capital santé</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur de Besoins Caloriques</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-calories"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Poids (kg)</label>
+                    <input type="number" class="form-input" id="poids" placeholder="70" value="70">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Taille (cm)</label>
+                    <input type="number" class="form-input" id="taille" placeholder="175" value="175">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Âge (années)</label>
+                    <input type="number" class="form-input" id="age" placeholder="23" value="23">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Niveau d'Activité</label>
+                    <select class="form-input" id="activite">
+                        <option value="1.2">Sédentaire (peu ou pas d'exercice)</option>
+                        <option value="1.375">Légèrement actif (1-3 jours/semaine)</option>
+                        <option value="1.55" selected>Modérément actif (3-5 jours/semaine)</option>
+                        <option value="1.725">Très actif (6-7 jours/semaine)</option>
+                        <option value="1.9">Extrêmement actif (2x par jour)</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateCalories()">
+                    <span>Calculer</span>
+                </button>
+                
+                <div id="calories-results" style="margin-top: 2rem; display: none;">
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-title">BMR (Métabolisme de Base)</div>
+                            <div class="card-value" id="result-bmr">0 kcal</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">TDEE (Dépense Totale)</div>
+                            <div class="card-value" id="result-tdee">0 kcal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3>📊 Répartition des Macronutriments</h3>
+                        <ul>
+                            <li><strong>Protéines (20%)</strong> : <span id="proteines">0</span> kcal (~<span id="proteines-g">0</span>g)</li>
+                            <li><strong>Lipides (27%)</strong> : <span id="lipides">0</span> kcal (~<span id="lipides-g">0</span>g)</li>
+                            <li><strong>Glucides (53%)</strong> : <span id="glucides">0</span> kcal (~<span id="glucides-g">0</span>g)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>💪 Programme Minimal Efficace (3x/semaine)</h3>
+                <ul>
+                    <li><strong>Séance 1 (Force haut du corps)</strong> : Développé couché, Tractions, Développé militaire</li>
+                    <li><strong>Séance 2 (Force bas du corps)</strong> : Squat, Soulevé de terre, Fentes</li>
+                    <li><strong>Séance 3 (Cardio/Mobilité)</strong> : Course à pied (30 min), Étirements, Gainage</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Nutrition Section -->
+        <section id="nutrition" class="section">
+            <div class="header">
+                <h2>Nutrition & Alimentation</h2>
+                <p>Budget alimentation étudiant optimisé</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Budget Mensuel Alimentation</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Budget Mensuel (€)</label>
+                    <input type="range" class="form-slider" id="budget-alim" min="100" max="500" step="10" value="200">
+                    <span class="slider-value" id="budget-alim-value">200€</span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nombre de Repas RU par Semaine</label>
+                    <input type="range" class="form-slider" id="repas-ru" min="0" max="14" step="1" value="5">
+                    <span class="slider-value" id="repas-ru-value">5</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateNutrition()">
+                    <span>Calculer</span>
+                </button>
+                
+                <div id="nutrition-results" style="margin-top: 2rem; display: none;">
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-title">Budget RU</div>
+                            <div class="card-value" id="result-budget-ru">0€</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Budget Courses</div>
+                            <div class="card-value" id="result-budget-courses">0€</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Coût par Repas</div>
+                            <div class="card-value" id="result-cout-repas">0€</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🥗 Stratégies d'Optimisation</h3>
+                <ul>
+                    <li><strong>Restaurant universitaire (CROUS)</strong> : Repas à 3,30€ (1€ pour les boursiers)</li>
+                    <li><strong>Batch cooking</strong> : Cuisiner pour 3-4 jours le dimanche</li>
+                    <li><strong>Légumineuses</strong> : Lentilles, pois chiches, haricots (protéines économiques)</li>
+                    <li><strong>Marchés en fin de journée</strong> : Prix réduits</li>
+                    <li><strong>Applications anti-gaspillage</strong> : Too Good To Go, Phenix</li>
+                    <li><strong>Achats en vrac</strong> : Riz, pâtes, flocons d'avoine</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>📋 Menu Hebdomadaire Économique</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Jour</th>
+                            <th>Déjeuner</th>
+                            <th>Dîner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Lundi</td><td>Riz + Lentilles + Légumes</td><td>Omelette + Salade</td></tr>
+                        <tr><td>Mardi</td><td>RU (3,30€)</td><td>Pâtes + Sauce tomate maison</td></tr>
+                        <tr><td>Mercredi</td><td>Riz + Pois chiches + Curry</td><td>Soupe + Pain</td></tr>
+                        <tr><td>Jeudi</td><td>RU (3,30€)</td><td>Quiche lorraine maison</td></tr>
+                        <tr><td>Vendredi</td><td>Restes</td><td>Poisson + Purée</td></tr>
+                        <tr><td>Samedi</td><td>Sandwich maison</td><td>Pizza maison</td></tr>
+                        <tr><td>Dimanche</td><td>Poulet rôti + Pommes de terre</td><td>Soupe + Fromage</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Productivity Section -->
+        <section id="productivity" class="section">
+            <div class="header">
+                <h2>Productivité & Gestion du Temps</h2>
+                <p>Optimisez votre efficacité quotidienne</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Timer Pomodoro</h3>
+                
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div style="font-family: 'Orbitron', sans-serif; font-size: 4rem; color: var(--accent-cyan);" id="pomodoro-timer">25:00</div>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-primary" onclick="startPomodoro()" id="pomodoro-btn">
+                            <span>Démarrer</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3>⚡ Cycle Pomodoro Optimal</h3>
+                    <ul>
+                        <li><strong>25 minutes</strong> de travail focalisé</li>
+                        <li><strong>5 minutes</strong> de pause</li>
+                        <li>Après 4 cycles : <strong>15-30 minutes</strong> de pause longue</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>📊 Matrice d'Eisenhower</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Urgent</th>
+                            <th>Non Urgent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Important</strong></td>
+                            <td style="background: rgba(255, 107, 53, 0.1);">À faire immédiatement (Crises)</td>
+                            <td style="background: rgba(0, 255, 136, 0.1);">À planifier (Développement)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Non Important</strong></td>
+                            <td style="background: rgba(0, 217, 255, 0.1);">À déléguer (Interruptions)</td>
+                            <td style="background: rgba(156, 163, 175, 0.1);">À éliminer (Distractions)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h3>🎯 Principe de Pareto (80/20)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    80% des résultats proviennent de 20% des efforts. Identifiez vos tâches à plus haute valeur ajoutée.
+                </p>
+                <ul>
+                    <li>Listez toutes vos activités de la semaine</li>
+                    <li>Évaluez l'impact de chacune sur vos objectifs</li>
+                    <li>Concentrez 80% de votre temps sur les 20% les plus impactantes</li>
+                    <li>Déléguez, automatisez ou éliminez le reste</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>⏰ Loi de Parkinson</h3>
+                <p style="color: var(--text-secondary);">
+                    "Le travail s'étale de façon à occuper le temps disponible pour son achèvement."
+                    <br><br>
+                    <strong>Solution :</strong> Fixez-vous des délais courts et respectez-les. Une tâche prend le temps que vous lui donnez.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Reputation Section -->
+        <section id="reputation" class="section">
+            <div class="header">
+                <h2>Réputation & Influence</h2>
+                <p>Construisez votre capital réputationnel</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur de Réputation</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-reputation"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Interactions Positives ce Mois</label>
+                    <input type="number" class="form-input" id="interactions-positives" placeholder="50" value="50">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Total Interactions</label>
+                    <input type="number" class="form-input" id="total-interactions" placeholder="80" value="80">
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateReputation()">
+                    <span>Calculer</span>
+                </button>
+                
+                <div id="reputation-results" style="margin-top: 2rem; display: none;">
+                    <div class="card">
+                        <div class="card-title">Score de Réputation</div>
+                        <div class="card-value" id="result-reputation">0/100</div>
+                        <div class="card-subtitle">Un score de 70+ est excellent</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>📈 Maximiser sa Réputation</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Une interaction positive = un échange où vous avez apporté de la valeur : conseil, écoute, aide, humour, introduction utile.
+                </p>
+                <ul>
+                    <li><strong>Écoute active</strong> : Ratio écoute/parole idéal ≈ 2:1</li>
+                    <li><strong>Les 10 premières minutes d'écoute</strong> apportent un gain énorme</li>
+                    <li><strong>Évitez les monologues</strong> sur vous-même</li>
+                    <li><strong>Apportez de la valeur</strong> avant de demander quelque chose</li>
+                    <li><strong>Soyez fiable</strong> : respectez vos engagements</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Salary Section -->
+        <section id="salary" class="section">
+            <div class="header">
+                <h2>Négociation Salariale</h2>
+                <p>Maximisez votre rémunération</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Simulateur de Négociation</h3>
+                
+                <div class="formula-box">
+                    <div id="formula-salary"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Offre Initiale (€/an)</label>
+                    <input type="number" class="form-input" id="offre-initiale" placeholder="35000" value="35000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Votre Valeur Perçue (€/an)</label>
+                    <input type="number" class="form-input" id="valeur-percue" placeholder="40000" value="40000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Coefficient de Négociation (0.3-0.5)</label>
+                    <input type="range" class="form-slider" id="coef-nego" min="0.3" max="0.5" step="0.05" value="0.4">
+                    <span class="slider-value" id="coef-value">0.40</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Dépend de votre pouvoir de négociation et du marché</p>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateSalary()">
+                    <span>Simuler la Négociation</span>
+                </button>
+                
+                <div id="salary-results" style="margin-top: 2rem; display: none;">
+                    <div class="card">
+                        <div class="card-title">Salaire Final Estimé</div>
+                        <div class="card-value" id="result-salary">0€</div>
+                        <div class="card-subtitle">Gain potentiel : <span id="gain-salary">0€</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>💡 Stratégie de Négociation</h3>
+                <ul>
+                    <li><strong>Préparation</strong> : Recherchez les salaires du marché (Glassdoor, Indeed, Apec)</li>
+                    <li><strong>Ancrage</strong> : Ne jamais donner son salaire actuel ; demander la fourchette du poste</li>
+                    <li><strong>Argumentaire</strong> : Listez vos réalisations chiffrées (ex: "J'ai augmenté les ventes de 15%")</li>
+                    <li><strong>Alternatives</strong> : Avoir une autre offre augmente le pouvoir de négociation</li>
+                    <li><strong>Package global</strong> : Négociez aussi les avantages (télétravail, formation, primes)</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>📊 Salaire Médian par Diplôme (France 2026)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Diplôme</th>
+                            <th>Salaire Net Médian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Bac</td><td>1 600€/mois</td></tr>
+                        <tr><td>Bac+2 (BTS/DUT)</td><td>1 800€/mois</td></tr>
+                        <tr><td>Licence (Bac+3)</td><td>2 000€/mois</td></tr>
+                        <tr><td>Master (Bac+5)</td><td>2 500€/mois</td></tr>
+                        <tr><td>Grande École / Doctorat</td><td>3 000-3 500€/mois</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Style Section -->
+        <section id="style" class="section">
+            <div class="header">
+                <h2>Style & Apparence</h2>
+                <p>Optimisez votre présentation physique</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>👔 Règle du "Fit" et de la Cohérence</h3>
+                <ul>
+                    <li><strong>Ajustement parfait</strong> : Le vêtement doit épouser la silhouette sans être trop serré ni trop ample</li>
+                    <li><strong>Couleurs</strong> : Les couleurs sombres et neutres (marine, gris, noir) projettent autorité. Les touches de couleur ajoutent chaleur.</li>
+                    <li><strong>Chaussures</strong> : Propres, cirées et de bonne facture. C'est l'élément le plus scruté.</li>
+                    <li><strong>Accessoires discrets</strong> : Une montre classique (même abordable) ou un bracelet en cuir</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>💪 Programme d'Optimisation Physique</h3>
+                <ul>
+                    <li><strong>Symétrie et posture</strong> : Consulter un kiné pour corriger les déséquilibres posturaux (scoliose légère, épaules en avant)</li>
+                    <li><strong>Musculation ciblée</strong> : Prioriser les exercices qui élargissent les épaules (développé militaire, élévations latérales) et affinent la taille (gainage)</li>
+                    <li><strong>Soin de la peau</strong> : Nettoyage quotidien, hydratation, protection solaire</li>
+                    <li><strong>Pilosité faciale</strong> : Si barbe clairsemée, rasez-vous net. Si barbe fournie, taillez avec précision</li>
+                    <li><strong>Coiffure</strong> : Choisir une coupe qui équilibre les proportions du visage</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>🎯 Ratio Épaules/Taille Idéal</h3>
+                <div class="card" style="margin-top: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Tour d'Épaules (cm)</label>
+                        <input type="number" class="form-input" id="tour-epaules" placeholder="115" value="115">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tour de Taille (cm)</label>
+                        <input type="number" class="form-input" id="tour-taille" placeholder="82" value="82">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="calculateRatio()">
+                        <span>Calculer le Ratio</span>
+                    </button>
+                    
+                    <div id="ratio-results" style="margin-top: 1.5rem; display: none;">
+                        <div class="card-title">Ratio Épaules/Taille</div>
+                        <div class="card-value" id="result-ratio">0.00</div>
+                        <div class="card-subtitle" id="ratio-interpretation">-</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🔬 Hygiène Olfactive</h3>
+                <ul>
+                    <li><strong>Douche quotidienne</strong> avec un savon doux, sans parfum persistant</li>
+                    <li><strong>Déodorant</strong> (combat les bactéries) plutôt qu'anti-transpirant (bloque la transpiration)</li>
+                    <li><strong>Notes légères</strong> : cristal d'alun, musc blanc</li>
+                    <li><strong>Alimentation</strong> : Une alimentation riche en fruits et légumes améliore l'odeur corporelle</li>
+                    <li><strong>Parfum léger</strong> : Eau de toilette à base de notes boisées ou musquées, mais ne masquez pas votre MHC naturel</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Attractivity Section (Most Important) -->
+        <section id="attractivity" class="section">
+            <div class="header">
+                <h2>🔥 Score d'Attractivité Masculine</h2>
+                <p>Analyse scientifique complète basée sur la psychologie évolutionniste</p>
+            </div>
+            
+            <div class="formula-box">
+                <div id="formula-attractivity"></div>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur d'Attractivité</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Symétrie Faciale (0-1)</label>
+                    <input type="range" class="form-slider" id="symetrie" min="0" max="1" step="0.01" value="0.8">
+                    <span class="slider-value" id="symetrie-value">0.80</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">0.5 = asymétrie notable, 0.8 = bonne symétrie, 0.95 = quasi-parfait</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Rapport Épaules/Taille</label>
+                    <input type="range" class="form-slider" id="rapport-epaules" min="1" max="1.6" step="0.01" value="1.35">
+                    <span class="slider-value" id="epaules-value">1.35</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">1.2 = faible, 1.35 = bon, 1.4+ = excellent</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Statut Social Perçu (0-10)</label>
+                    <input type="range" class="form-slider" id="statut" min="0" max="10" step="0.5" value="5">
+                    <span class="slider-value" id="statut-value">5.0</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Diplôme, ambition, réseau, signaux matériels discrets</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Humour (0-10)</label>
+                    <input type="range" class="form-slider" id="humour" min="0" max="10" step="0.5" value="7">
+                    <span class="slider-value" id="humour-value">7.0</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Capacité à générer des émotions positives, timing</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Stabilité Émotionnelle (0-10)</label>
+                    <input type="range" class="form-slider" id="stabilite" min="0" max="10" step="0.5" value="8">
+                    <span class="slider-value" id="stabilite-value">8.0</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Calme, confiance, maîtrise de soi</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Nervosité Apparente (0-10)</label>
+                    <input type="range" class="form-slider" id="nervosite" min="0" max="10" step="0.5" value="3">
+                    <span class="slider-value" id="nervosite-value">3.0</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">0 = zen absolu, 10 = très nerveux</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Qualité de l'Odeur (0-1)</label>
+                    <input type="range" class="form-slider" id="odeur" min="0" max="1" step="0.01" value="0.7">
+                    <span class="slider-value" id="odeur-value">0.70</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">Compatibilité MHC, hygiène, pas de parfum trop fort</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Voix (Gravité) (0-1)</label>
+                    <input type="range" class="form-slider" id="voix" min="0" max="1" step="0.01" value="0.6">
+                    <span class="slider-value" id="voix-value">0.60</span>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">0.5 = moyenne, 0.7+ = voix grave et attractive</p>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateAttractivity()">
+                    <span>Calculer le Score</span>
+                </button>
+            </div>
+            
+            <div id="attractivity-results" style="margin-top: 2rem; display: none;">
+                <div class="card">
+                    <div class="score-circle">
+                        <svg width="200" height="200">
+                            <circle class="score-circle-bg" cx="100" cy="100" r="85"></circle>
+                            <circle class="score-circle-progress" id="score-circle" cx="100" cy="100" r="85" 
+                                    stroke-dasharray="534" stroke-dashoffset="534"></circle>
+                        </svg>
+                        <div class="score-text">
+                            <div class="score-number" id="score-number">0.00</div>
+                            <div class="score-label">Score</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 1rem;">
+                            <span id="score-interpretation">-</span>
+                        </h3>
+                        <p style="color: var(--text-secondary);" id="score-description">-</p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📊 Analyse Détaillée</h3>
+                    <ul id="score-breakdown"></ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🧬 Fondements Scientifiques</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Ce calculateur est basé sur trois ouvrages de référence en psychologie évolutionniste :
+                </p>
+                <ul>
+                    <li><strong>The Evolution of Desire</strong> (David M. Buss) : Stratégies d'accouplement et préférences féminines</li>
+                    <li><strong>Why Beautiful People Have More Daughters</strong> (Miller & Kanazawa) : Biologie de la beauté</li>
+                    <li><strong>The Biology of Beauty</strong> (Rachelle M. Smith) : Marqueurs de santé développementale</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>💪 Actions d'Optimisation Prioritaires</h3>
+                <ul>
+                    <li><strong>Musculation ciblée</strong> : Développer les épaules (développé militaire, élévations latérales) et le dos (tractions, rowing) pour améliorer le rapport épaules/taille. Objectif : >1.4</li>
+                    <li><strong>Posture</strong> : Consulter un kiné pour corriger les asymétries. Power Pose 2 minutes avant situations importantes.</li>
+                    <li><strong>Voix</strong> : Exercices de respiration diaphragmatique quotidiens. Humming pour travailler la résonance thoracique.</li>
+                    <li><strong>Style</strong> : Vêtements parfaitement ajustés (ni trop serrés ni trop amples). Chaussures propres et de qualité.</li>
+                    <li><strong>Hygiène olfactive</strong> : Douche quotidienne, déodorant (pas anti-transpirant), éviter les parfums trop forts qui masquent le MHC naturel.</li>
+                    <li><strong>Développement personnel</strong> : Méditation pour la stabilité émotionnelle. Pratique de l'humour et du storytelling.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Career Section -->
+        <section id="career" class="section">
+            <div class="header">
+                <h2>Carrière & Développement Professionnel</h2>
+                <p>Optimisez votre trajectoire professionnelle</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>💼 Compétences les Plus Valorisées (2026)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Compétence</th>
+                            <th>Impact Salarial</th>
+                            <th>Temps d'Acquisition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Analyse (Excel, SQL, Power BI)</td>
+                            <td>+15-25%</td>
+                            <td>3-6 mois</td>
+                        </tr>
+                        <tr>
+                            <td>Programmation (Python, JavaScript)</td>
+                            <td>+20-30%</td>
+                            <td>6-12 mois</td>
+                        </tr>
+                        <tr>
+                            <td>Anglais professionnel (B2+)</td>
+                            <td>+10-20%</td>
+                            <td>600-800 heures</td>
+                        </tr>
+                        <tr>
+                            <td>Gestion de projet (Agile, Scrum)</td>
+                            <td>+10-15%</td>
+                            <td>2-3 mois</td>
+                        </tr>
+                        <tr>
+                            <td>Marketing Digital (SEO, SEA)</td>
+                            <td>+10-20%</td>
+                            <td>3-6 mois</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h3>📊 Salaire Médian par Diplôme (France 2026)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Diplôme</th>
+                            <th>Salaire Net Médian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Bac</td><td>1 600€/mois</td></tr>
+                        <tr><td>Bac+2 (BTS/DUT)</td><td>1 800€/mois</td></tr>
+                        <tr><td>Licence (Bac+3)</td><td>2 000€/mois</td></tr>
+                        <tr><td>Master (Bac+5)</td><td>2 500€/mois</td></tr>
+                        <tr><td>Grande École / Doctorat</td><td>3 000-3 500€/mois</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h3>📈 Stratégie de Mobilité Professionnelle</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Changez d'emploi stratégiquement pour maximiser votre progression salariale et vos compétences.
+                </p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Période de Carrière</th>
+                            <th>Fréquence Recommandée</th>
+                            <th>Raison</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Début (0-5 ans)</td>
+                            <td>Tous les 2-3 ans</td>
+                            <td>Maximiser l'apprentissage et le salaire</td>
+                        </tr>
+                        <tr>
+                            <td>Milieu (5-15 ans)</td>
+                            <td>Tous les 3-5 ans</td>
+                            <td>Approfondir l'expertise</td>
+                        </tr>
+                        <tr>
+                            <td>Fin (15+ ans)</td>
+                            <td>Tous les 5-7 ans</td>
+                            <td>Stabilité et avantages acquis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Learning Section -->
+        <section id="learning" class="section">
+            <div class="header">
+                <h2>Apprentissage & Cognition</h2>
+                <p>Optimisez votre capacité d'apprentissage</p>
+            </div>
+            
+            <div class="card">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-cyan); margin-bottom: 2rem;">Calculateur d'Apprentissage Linguistique</h3>
+                
+                <div class="form-group">
+                    <label class="form-label">Niveau Cible (CECRL)</label>
+                    <select class="form-input" id="niveau-cible">
+                        <option value="100">A1 (Débutant) - 60-100h</option>
+                        <option value="200">A2 (Élémentaire) - 160-200h</option>
+                        <option value="400">B1 (Intermédiaire) - 350-400h</option>
+                        <option value="600" selected>B2 (Avancé) - 500-600h</option>
+                        <option value="800">C1 (Autonome) - 700-800h</option>
+                        <option value="1200">C2 (Maîtrise) - 1000-1200h</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Heures par Semaine</label>
+                    <input type="range" class="form-slider" id="heures-semaine" min="1" max="20" step="1" value="6">
+                    <span class="slider-value" id="heures-value">6h</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="calculateLanguage()">
+                    <span>Calculer la Durée</span>
+                </button>
+                
+                <div id="language-results" style="margin-top: 2rem; display: none;">
+                    <div class="card-grid">
+                        <div class="card">
+                            <div class="card-title">Heures Totales</div>
+                            <div class="card-value" id="result-heures">0h</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">Durée Estimée</div>
+                            <div class="card-value" id="result-semaines">0 sem</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h3>🧠 Courbe d'Ebbinghaus : La Répétition Espacée</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Sans répétition, vous oubliez 70% de ce que vous avez appris en 24 heures.
+                </p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Répétition</th>
+                            <th>Intervalle après apprentissage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>24 heures</td></tr>
+                        <tr><td>2</td><td>3 jours</td></tr>
+                        <tr><td>3</td><td>1 semaine</td></tr>
+                        <tr><td>4</td><td>2-3 semaines</td></tr>
+                        <tr><td>5</td><td>1-2 mois</td></tr>
+                    </tbody>
+                </table>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">
+                    <strong>Outil recommandé :</strong> Anki (logiciel gratuit de flashcards avec répétition espacée)
+                </p>
+            </div>
+            
+            <div class="info-box">
+                <h3>⚡ Techniques d'Apprentissage Efficaces</h3>
+                <ul>
+                    <li><strong>Méthode Feynman</strong> : Expliquez le concept comme à un enfant de 12 ans. Identifiez les lacunes.</li>
+                    <li><strong>Testing Effect</strong> : Se tester activement est plus efficace que relire passivement.</li>
+                    <li><strong>Pomodoro</strong> : 25 min de travail focalisé + 5 min de pause. Pause longue après 4 cycles.</li>
+                    <li><strong>Interleaving</strong> : Alternez les sujets au lieu de bloquer (mieux pour la rétention à long terme).</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</div>
+
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+
+<!-- KaTeX JS -->
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+<!-- Custom JS -->
+<script src="script.js"></script>
+```
+
+</body>
+</html>
